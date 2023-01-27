@@ -11,10 +11,10 @@ import screenshotProfitLoss from "@/images/screenshots/profit-loss.png";
 
 const features: any[] = [
   {
-    name: "Reporting",
-    summary: "Stay on top of things with always up-to-date reporting features.",
+    name: "Writing Assistant",
+    summary: "Revolutionize Your Writing with AI-Powered Paraphrasing",
     description:
-      "We talked about reporting in the section above but we needed three items here, so mentioning it one more time for posterity.",
+      "Our cutting-edge AI technology rewrites text to make it unique, without compromising its meaning. Say goodbye to plagiarism and hello to error-free, high-quality writing.",
     image: screenshotProfitLoss,
     icon: function ReportingIcon() {
       let id = useId();
@@ -45,11 +45,10 @@ const features: any[] = [
     },
   },
   {
-    name: "Inventory",
-    summary:
-      "Never lose track of what’s in stock with accurate inventory tracking.",
+    name: "Potential",
+    summary: "Unlock Your Writing Potential with Our Advanced Algorithms",
     description:
-      "We don’t offer this as part of our software but that statement is inarguably true. Accurate inventory tracking would help you for sure.",
+      "Our advanced algorithms are designed to understand the meaning and context of your text, ensuring that your paraphrased content is accurate, natural, and easy to read.",
     image: screenshotInventory,
     icon: function InventoryIcon() {
       return (
@@ -73,11 +72,10 @@ const features: any[] = [
     },
   },
   {
-    name: "Contacts",
-    summary:
-      "Organize all of your contacts, service providers, and invoices in one place.",
+    name: "Effiency",
+    summary: "Efficiency and Convenience at Your Fingertips",
     description:
-      "This also isn’t actually a feature, it’s just some friendly advice. We definitely recommend that you do this, you’ll feel really organized and professional.",
+      "With our user-friendly interface, you can easily upload your text and get a rewritten version in minutes. Plus, our service is available 24/7, so you can paraphrase your text whenever you need it.",
     image: screenshotContacts,
     icon: function ContactsIcon() {
       return (

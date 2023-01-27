@@ -1,4 +1,5 @@
 export function Logo(props: any) {
+  // Draw a pencil with a writte line below
   return (
     <svg aria-hidden="true" viewBox="0 0 109 40" {...props}>
       <path
