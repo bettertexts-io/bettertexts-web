@@ -6,7 +6,7 @@ import backgroundImage from "@/images/background-faqs.jpg";
 const faqs = [
   [
     {
-      question: "What is AI Paraphrasing?",
+      question: "What is BetterTexts?",
       answer:
         "BetterTexts is a service that uses artificial intelligence technology to automatically rewrite text to make it unique, without changing its meaning. This can be useful for avoiding plagiarism, as well as for improving the overall quality of your writing.",
     },
@@ -18,14 +18,14 @@ const faqs = [
   ],
   [
     {
-      question: "How does the AI Paraphrasing service work?",
+      question: "What are the benefits of using BetterTexts?",
       answer:
-        "Our AI Paraphrasing service works by analyzing your text and understanding its meaning and context. It then rewrites it to produce a unique version, while maintaining the same meaning. The final result is checked for plagiarism and then returned to you.",
+        "AI Paraphrasing can help you avoid duplications, improve the quality of your writing, and save time. It can also help you create unique content that can be used for SEO or other purposes.",
     },
     {
-      question: "What are the benefits of using AI Paraphrasing?",
+      question: "How accurate is the AI Paraphrasing service?",
       answer:
-        "AI Paraphrasing can help you avoid plagiarism, improve the quality of your writing, and save time. It can also help you create unique content that can be used for SEO or other purposes.",
+        "Our AI Paraphrasing service uses advanced algorithms to ensure that the rewritten text is accurate and matches your selected tone of voice. However, as with any AI-based technology, there may be some inaccuracies or errors. We recommend that you review the paraphrased text before using it.",
     },
   ],
 ];

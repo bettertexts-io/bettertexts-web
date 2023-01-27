@@ -26,23 +26,15 @@ export function CallToAction() {
           <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl">
             Upgrade your writing now
           </h2>
-          <div
-            id="getWaitlistContainer"
-            className="mt-10"
-            data-waitlist_id="4994"
-          ></div>
 
-          <Helmet>
-            <link
-              rel="stylesheet"
-              type="text/css"
-              href="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.css"
-            />
-            <script
-              async
-              src="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.js"
-            ></script>
-          </Helmet>
+          <iframe
+            srcDoc={`
+            <div id="getWaitlistContainer" className="mt-10" data-waitlist_id="4994"></div>
+            <link rel="stylesheet" type="text/css" href="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.css" />
+            <script async src="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.js"></script>
+          `}
+            className="mt-10 w-full h-80"
+          />
         </div>
       </Container>
     </section>

@@ -17,8 +17,8 @@ function MobileNavLink({
   children: React.ReactNode;
 }) {
   return (
-    <Popover.Button as={Link} href={href} className="block w-full p-2">
-      {children}
+    <Popover.Button className="block w-full p-2">
+      <a href={href}>{children}</a>
     </Popover.Button>
   );
 }
@@ -84,11 +84,9 @@ function MobileNavigation() {
             as="div"
             className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5"
           >
+            <MobileNavLink href="#demo">Demo</MobileNavLink>
             <MobileNavLink href="#features">Features</MobileNavLink>
-            {/* <MobileNavLink href="#testimonials">Testimonials</MobileNavLink> */}
             <MobileNavLink href="#pricing">Pricing</MobileNavLink>
-            {/* <hr className="m-2 border-slate-300/40" /> */}
-            {/* <MobileNavLink href="/login">Sign in</MobileNavLink> */}
           </Popover.Panel>
         </Transition.Child>
       </Transition.Root>
@@ -111,11 +109,11 @@ export function Header() {
               <NavLink href="#pricing">Pricing</NavLink>
             </div>
           </div>
-          <div className="flex items-center gap-x-5 md:gap-x-8">
-            <Button href="#get-started-today" color="blue">
+          <div className="w-full md:w-auto flex justify-between md:justify-start items-center gap-x-5 md:gap-x-8">
+            <Button href="#get-started-today" color="blue" className="order-2">
               <span>Join waitlist</span>
             </Button>
-            <div className="-mr-1 md:hidden">
+            <div className="-mr-1 order-1 md:hidden">
               <MobileNavigation />
             </div>
           </div>

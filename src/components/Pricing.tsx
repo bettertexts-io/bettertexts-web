@@ -147,18 +147,18 @@ export function Pricing() {
             name="Starter"
             price="4,95 €"
             description="Unlock the Potential of AI Paraphrasing"
-            href="/register"
+            href="#get-started-today"
             features={["Basic AI-powered paraphrasing", "macOS App"]}
           />
           <Plan
             name="Pro"
             price="8,95 €"
             description="Elevate Your Writing with Our Pro Plan"
-            href="/register"
+            href="#get-started-today"
             features={[
               "Advanced AI-powered paraphrasing",
-              "Priority customer support",
               "Made for professional use",
+              "Priority customer support",
             ]}
           />
         </div>
