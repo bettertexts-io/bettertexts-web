@@ -47,13 +47,14 @@ export function DemoApp({ className }: { className?: string }) {
   const styleTabs = [
     { name: "Professional", id: "professional" },
     { name: "Relaxed", id: "relaxed" },
-    { name: "Gen-Z", id: "genz" },
+    { name: "Colloquial", id: "colloquial" },
   ];
 
   const mediumTabs = [
     { name: "Message", id: "message" },
-    { name: "E-Mail", id: "email" },
+    // { name: "E-Mail", id: "email" },
     { name: "Tweet", id: "tweet" },
+    { name: "Joke", id: "joke" },
   ];
 
   const submit = async (data: typeof initialValues) => {
