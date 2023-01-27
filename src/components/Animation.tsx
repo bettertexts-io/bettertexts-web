@@ -26,10 +26,9 @@ export const Animation = () => {
   }, []);
 
   return (
-    <p className="mx-auto mt-10 max-w-4xl text-2xl tracking-tight text-slate-700">
+    <p className="text-2xl tracking-tight text-slate-700">
       <span
         className="transform transition-all duration-700"
-        style={{ whiteSpace: "pre" }}
         //@ts-ignore
         ref={element}
       ></span>

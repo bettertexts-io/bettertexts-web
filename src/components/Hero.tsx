@@ -19,7 +19,9 @@ export function Hero() {
           <span className="relative">Texts</span>
         </span>
       </h1>
-      <Animation />
+      <div className="mx-auto max-w-3xl md:max-w-4xl overflow-hidden mt-10 px-6">
+        <Animation />
+      </div>
       <div className="mt-12 flex justify-center gap-x-6">
         <Button href="#get-started-today">Join our waitlist</Button>
         <Button href="#demo" variant="outline">
