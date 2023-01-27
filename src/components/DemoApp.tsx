@@ -51,8 +51,8 @@ export function DemoApp({ className }: { className?: string }) {
   ];
 
   const mediumTabs = [
-    { name: "Message", id: "message" },
     // { name: "E-Mail", id: "email" },
+    { name: "Message", id: "message" },
     { name: "Tweet", id: "tweet" },
     { name: "Joke", id: "joke" },
   ];

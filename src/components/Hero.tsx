@@ -5,7 +5,7 @@ import { Animation } from "./Animation";
 export function Hero() {
   return (
     <Container className="pt-20 pb-16 text-center lg:pt-32">
-      <h1 className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-8xl">
+      <h1 className="mx-auto max-w-4xl font-display text-6xl font-medium tracking-tight text-slate-900 sm:text-8xl">
         Better
         <span className="relative whitespace-nowrap text-blue-600">
           <svg
@@ -22,7 +22,7 @@ export function Hero() {
       <div className="mx-auto max-w-3xl md:max-w-4xl overflow-hidden mt-10 px-6">
         <Animation />
       </div>
-      <div className="mt-12 flex justify-center gap-x-6">
+      <div className="mt-12 flex flex-col gap-y-6 md:flex-row justify-center md:gap-x-6">
         <Button href="#get-started-today">Join our waitlist</Button>
         <Button href="#demo" variant="outline">
           <svg
@@ -34,41 +34,7 @@ export function Hero() {
           <span className="ml-3">Try our demo now</span>
         </Button>
       </div>
-      <div className="mt-36 lg:mt-44">
-        {/* <p className="font-display text-base text-slate-900">
-          Trusted by these six companies so far
-        </p>
-        <ul
-          role="list"
-          className="mt-8 flex items-center justify-center gap-x-8 sm:flex-col sm:gap-x-0 sm:gap-y-10 xl:flex-row xl:gap-x-12 xl:gap-y-0"
-        >
-          {[
-            [
-              { name: "Transistor", logo: logoTransistor },
-              { name: "Tuple", logo: logoTuple },
-              { name: "StaticKit", logo: logoStaticKit },
-            ],
-            [
-              { name: "Mirage", logo: logoMirage },
-              { name: "Laravel", logo: logoLaravel },
-              { name: "Statamic", logo: logoStatamic },
-            ],
-          ].map((group, groupIndex) => (
-            <li key={groupIndex}>
-              <ul
-                role="list"
-                className="flex flex-col items-center gap-y-8 sm:flex-row sm:gap-x-12 sm:gap-y-0"
-              >
-                {group.map((company) => (
-                  <li key={company.name} className="flex">
-                    <Image src={company.logo} alt={company.name} unoptimized />
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul> */}
-      </div>
+      <div className="mt-20 lg:mt-44"></div>
     </Container>
   );
 }
