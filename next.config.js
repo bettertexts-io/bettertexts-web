@@ -6,4 +6,6 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withPlausibleProxy()({
+  ...nextConfig,
+});
