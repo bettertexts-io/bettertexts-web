@@ -183,7 +183,7 @@ function FeaturesDesktop() {
               />
             ))}
           </Tab.List>
-          <Tab.Panels className="relative mt-20 overflow-hidden rounded-4xl bg-slate-200 px-14 py-16 xl:px-16">
+          {/* <Tab.Panels className="relative mt-20 overflow-hidden rounded-4xl bg-slate-200 px-14 py-16 xl:px-16">
             <div className="-mx-5 flex">
               {features.map((feature, featureIndex) => (
                 <Tab.Panel
@@ -208,7 +208,7 @@ function FeaturesDesktop() {
               ))}
             </div>
             <div className="pointer-events-none absolute inset-0 rounded-4xl ring-1 ring-inset ring-slate-900/10" />
-          </Tab.Panels>
+          </Tab.Panels> */}
         </>
       )}
     </Tab.Group>
@@ -218,19 +218,19 @@ function FeaturesDesktop() {
 export function SecondaryFeatures() {
   return (
     <section
-      id="secondary-features"
+      id="features"
       aria-label="Features for simplifying everyday business tasks"
       className="pt-20 pb-14 sm:pb-20 sm:pt-32 lg:pb-32"
     >
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
-          <h2 className="font-display text-3xl tracking-tight text-slate-900 sm:text-4xl">
-            Simplify everyday business tasks.
+          <h2 className="font-display text-2xl tracking-tight text-slate-900 sm:text-3xl">
+            Unlock the Power of AI-Enhanced Writing
           </h2>
-          <p className="mt-4 text-lg tracking-tight text-slate-700">
+          {/* <p className="mt-4 text-lg tracking-tight text-slate-700">
             Because you’d probably be a little confused if we suggested you
             complicate your everyday business tasks instead.
-          </p>
+          </p> */}
         </div>
         <FeaturesMobile />
         <FeaturesDesktop />

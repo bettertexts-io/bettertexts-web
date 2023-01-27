@@ -85,10 +85,10 @@ function MobileNavigation() {
             className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5"
           >
             <MobileNavLink href="#features">Features</MobileNavLink>
-            <MobileNavLink href="#testimonials">Testimonials</MobileNavLink>
+            {/* <MobileNavLink href="#testimonials">Testimonials</MobileNavLink> */}
             <MobileNavLink href="#pricing">Pricing</MobileNavLink>
-            <hr className="m-2 border-slate-300/40" />
-            <MobileNavLink href="/login">Sign in</MobileNavLink>
+            {/* <hr className="m-2 border-slate-300/40" /> */}
+            {/* <MobileNavLink href="/login">Sign in</MobileNavLink> */}
           </Popover.Panel>
         </Transition.Child>
       </Transition.Root>
@@ -106,12 +106,13 @@ export function Header() {
               <Logo className="h-10 w-auto" />
             </Link> */}
             <div className="hidden md:flex md:gap-x-6">
+              <NavLink href="#demo">Demo</NavLink>
               <NavLink href="#features">Features</NavLink>
               <NavLink href="#pricing">Pricing</NavLink>
             </div>
           </div>
           <div className="flex items-center gap-x-5 md:gap-x-8">
-            <Button href="#" color="blue">
+            <Button href="#get-started-today" color="blue">
               <span>Join waitlist</span>
             </Button>
             <div className="-mr-1 md:hidden">

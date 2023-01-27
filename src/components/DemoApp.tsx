@@ -1,11 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
 
 import { Button } from "./Button";
 import TabGroup from "./TabGroup";
-import { LoadingIndicator } from "./LoadingIndicator";
 
 import { logger } from "@/utils/logger";
 import CopyToClipboard from "react-copy-to-clipboard";
@@ -26,9 +25,22 @@ async function submitRephrasePrompt(data: Object) {
 export function DemoApp({ className }: { className?: string }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [result, setResult] = useState<string>("");
+  const [initiaded, setInitiated] = useState<boolean>(false);
 
   const [styleTabId, setStyleTabId] = useState<string>("professional");
   const [mediumTabId, setMediumTabId] = useState<string>("message");
+
+  useEffect(() => {
+    if (result) {
+      navigator.clipboard.writeText(result);
+    }
+  }, [result]);
+
+  useEffect(() => {
+    if (!initiaded) {
+      setInitiated(true);
+    }
+  }, [initiaded]);
 
   const initialValues = {
     input: "",
@@ -75,66 +87,68 @@ export function DemoApp({ className }: { className?: string }) {
         className
       )}
     >
-      <form onSubmit={handleSubmit(submit)} className="space-y-6">
-        <textarea
-          rows={3}
-          className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-400 focus:ring-blue-400 sm:text-sm"
-          defaultValue={""}
-          placeholder="Enter your text to rephrase"
-          {...register("input")}
-        />
-
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:space-x-4">
-          <TabGroup
-            tabs={styleTabs}
-            selectedId={styleTabId}
-            selectTab={(tabId: string) => setStyleTabId(tabId)}
+      {initiaded ? (
+        <form onSubmit={handleSubmit(submit)} className="space-y-6">
+          <textarea
+            rows={3}
+            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-400 focus:ring-blue-400 sm:text-sm"
+            defaultValue={""}
+            placeholder="Enter your text to rephrase"
+            {...register("input")}
           />
-          <TabGroup
-            tabs={mediumTabs}
-            selectedId={mediumTabId}
-            selectTab={(tabId: string) => setMediumTabId(tabId)}
-          />
-        </div>
-        <Button type="submit">
-          {isLoading ? (
-            <div className="flex flex-row space-x-2 items-center">
-              <span>Rephrase</span>
-              <div
-                style={{ borderTopColor: "transparent" }}
-                className="spinner w-5 h-5 border-2 border-solid rounded-full animate-spin transition-colors duration-500 border-white"
-              />
-            </div>
-          ) : (
-            <span>Rephrase ⚡️</span>
-          )}
-        </Button>
 
-        {result && (
-          <div className="w-full flex justify-center space-x-8 border border-gray-300 bg-blue-50 text-gray-700 rounded-md mt-5 py-5 px-6">
-            <div></div>
-            <span>{result}</span>
-            <CopyToClipboard text={result}>
-              <button type="button" className="w-6 h-6">
-                <svg
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.5}
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-1.5a2.251 2.251 0 00-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 00-9-9z"
-                  />
-                </svg>
-              </button>
-            </CopyToClipboard>
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:space-x-4">
+            <TabGroup
+              tabs={styleTabs}
+              selectedId={styleTabId}
+              selectTab={(tabId: string) => setStyleTabId(tabId)}
+            />
+            <TabGroup
+              tabs={mediumTabs}
+              selectedId={mediumTabId}
+              selectTab={(tabId: string) => setMediumTabId(tabId)}
+            />
           </div>
-        )}
-      </form>
+          <Button type="submit">
+            {isLoading ? (
+              <div className="flex flex-row space-x-2 items-center">
+                <span>Rephrase</span>
+                <div
+                  style={{ borderTopColor: "transparent" }}
+                  className="spinner w-5 h-5 border-2 border-solid rounded-full animate-spin transition-colors duration-500 border-white"
+                />
+              </div>
+            ) : (
+              <span>Rephrase ⚡️</span>
+            )}
+          </Button>
+
+          {result && (
+            <div className="w-full flex justify-center space-x-8 border border-gray-300 bg-blue-50 text-gray-700 rounded-md mt-5 py-5 px-6">
+              <div></div>
+              <span>{result}</span>
+              <CopyToClipboard text={result}>
+                <button type="button" className="w-6 h-6">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={1.5}
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-1.5a2.251 2.251 0 00-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 00-9-9z"
+                    />
+                  </svg>
+                </button>
+              </CopyToClipboard>
+            </div>
+          )}
+        </form>
+      ) : null}
     </div>
   );
 }
