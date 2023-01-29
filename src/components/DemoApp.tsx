@@ -1,16 +1,19 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { WidgetInstance } from "friendly-challenge";
 
 import { Button } from "./Button";
 import TabGroup from "./TabGroup";
+import SelectMenu from "./SelectMenu";
+import NotificationWrapper, { NOTIFICATION_TYPE } from "./NotificationWrapper";
 
 import { logger } from "@/utils/logger";
 
 async function submitRephrasePrompt(data: Object) {
-  const res = await fetch("https://api.bettertexts.io/api/v1/paraphrase", {
+  const res = await fetch("https://api.bettertexts.io/api/v1/paraphrase/demo", {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
@@ -25,6 +28,24 @@ async function submitRephrasePrompt(data: Object) {
 export function DemoApp({ className }: { className?: string }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [result, setResult] = useState<string>("");
+  const [selectedLanguageCode, setSelectedLanguageCode] =
+    useState<string>("en");
+  const [notificationMessage, setNotificationMessage] = useState<string>("");
+
+  const captchaWidgetRef = useRef<any>();
+  const [captchaSolution, setCaptchaSolution] = useState<string>("");
+
+  useEffect(() => {
+    setCaptchaSolution("");
+    const el = captchaWidgetRef.current;
+    if (el) {
+      new WidgetInstance(el, {
+        doneCallback: (solution) => {
+          setCaptchaSolution(solution);
+        },
+      });
+    }
+  }, []);
 
   const [styleTabId, setStyleTabId] = useState<string>("professional");
   const [mediumTabId, setMediumTabId] = useState<string>("message");
@@ -46,8 +67,8 @@ export function DemoApp({ className }: { className?: string }) {
 
   const styleTabs = [
     { name: "Professional", id: "professional" },
-    { name: "Relaxed", id: "relaxed" },
-    { name: "Colloquial", id: "colloquial" },
+    { name: "Playful", id: "playful" },
+    { name: "Gen-Z", id: "gen-z" },
   ];
 
   const mediumTabs = [
@@ -55,6 +76,11 @@ export function DemoApp({ className }: { className?: string }) {
     { name: "Message", id: "message" },
     { name: "Tweet", id: "tweet" },
     { name: "Joke", id: "joke" },
+  ];
+
+  const languages = [
+    { name: "Output in English 🇬🇧", id: "en" },
+    { name: "Output in German 🇩🇪", id: "de" },
   ];
 
   const submit = async (data: typeof initialValues) => {
@@ -65,6 +91,8 @@ export function DemoApp({ className }: { className?: string }) {
         input: data.input,
         style: styleTabId,
         medium: mediumTabId,
+        captcha_solution: captchaSolution,
+        langCode: selectedLanguageCode,
       });
 
       setResult(res[0]);
@@ -90,7 +118,7 @@ export function DemoApp({ className }: { className?: string }) {
           {...register("input")}
         />
 
-        <div className="flex flex-col space-y-2 sm:flex-row sm:justify-between sm:space-x-4">
+        <div className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:justify-between sm:space-x-4">
           <TabGroup
             tabs={styleTabs}
             selectedId={styleTabId}
@@ -102,25 +130,52 @@ export function DemoApp({ className }: { className?: string }) {
             selectTab={(tabId: string) => setMediumTabId(tabId)}
           />
         </div>
-        <Button type="submit">
-          {isLoading ? (
-            <div className="flex flex-row space-x-2 items-center">
-              <span>Rephrase</span>
-              <div
-                style={{ borderTopColor: "transparent" }}
-                className="spinner w-5 h-5 border-2 border-solid rounded-full animate-spin transition-colors duration-500 border-white"
-              />
-            </div>
-          ) : (
-            <span>Rephrase ⚡️</span>
-          )}
-        </Button>
+
+        <div className="w-full md:w-1/2">
+          <SelectMenu
+            options={languages.map((l) => l.name)}
+            value={languages.find((l) => l.id === selectedLanguageCode)!.name}
+            placeholder={
+              languages.find((l) => l.id === selectedLanguageCode)!.name
+            }
+            onSelect={(val) => {
+              const language = languages.find((l) => l.name === val);
+              if (language) setSelectedLanguageCode(language.id);
+            }}
+          />
+        </div>
+
+        <div className="flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:justify-between sm:space-x-4">
+          <Button type="submit" disabled={captchaSolution === ""}>
+            {isLoading ? (
+              <div className="flex flex-row space-x-2 items-center">
+                <span>Rephrase</span>
+                <div
+                  style={{ borderTopColor: "transparent" }}
+                  className="spinner w-5 h-5 border-2 border-solid rounded-full animate-spin transition-colors duration-500 border-white"
+                />
+              </div>
+            ) : (
+              <span>Rephrase ⚡️</span>
+            )}
+          </Button>
+          <div
+            ref={captchaWidgetRef}
+            className="frc-captcha"
+            data-sitekey={process.env.NEXT_PUBLIC_FRIENDLY_CAPTCHA_SITE_KEY}
+          ></div>
+        </div>
 
         {result && (
           <div className="w-full flex justify-center space-x-8 border border-gray-300 bg-blue-50 text-gray-700 rounded-md mt-5 py-5 px-6">
             <div></div>
             <span>{result}</span>
-            <CopyToClipboard text={result}>
+            <CopyToClipboard
+              text={result}
+              onCopy={() => {
+                setNotificationMessage("Text copied to clipboard");
+              }}
+            >
               <button type="button" className="w-6 h-6">
                 <svg
                   fill="none"
@@ -141,6 +196,12 @@ export function DemoApp({ className }: { className?: string }) {
           </div>
         )}
       </form>
+      <NotificationWrapper
+        type={NOTIFICATION_TYPE.SUCCESS}
+        message={notificationMessage}
+        isVisible={notificationMessage.length > 0}
+        onClose={() => setNotificationMessage("")}
+      ></NotificationWrapper>
     </div>
   );
 }

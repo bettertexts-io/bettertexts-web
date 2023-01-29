@@ -2,9 +2,9 @@ import clsx from "clsx";
 
 const baseStyles = {
   solid:
-    "group inline-flex items-center justify-center rounded-full py-3 px-6 text-md font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2",
+    "group inline-flex items-center justify-center rounded-full py-3 px-6 text-md font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50",
   outline:
-    "group inline-flex ring-1 items-center justify-center rounded-full py-3 px-6 text-md focus:outline-none",
+    "group inline-flex ring-1 items-center justify-center rounded-full py-3 px-6 text-md focus:outline-none disabled:opacity-50",
 };
 
 const variantStyles = {
@@ -36,6 +36,7 @@ export function Button({
   className?: string;
   href?: string;
   children: React.ReactNode;
+  disabled?: boolean;
   type?: "button" | "submit" | "reset";
 }) {
   className = clsx(
